@@ -7,7 +7,9 @@ import (
 
 func main() {
 	rl.InitWindow(800, 450, "The 3D Experiment")
-	rl.SetTargetFPS(60)
+
+	refrate := rl.GetMonitorRefreshRate(rl.GetCurrentMonitor())
+	rl.SetTargetFPS(int32(refrate))
 
 	state := game.InitializeState()
 	game.Setup(&state)

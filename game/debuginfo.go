@@ -13,9 +13,9 @@ func DrawDebugInfo(state *State) {
 		mem := runtime.MemStats{}
 		runtime.ReadMemStats(&mem)
 
-		state.Text.DrawNextLine(fmt.Sprintf("Frame time: %.3f", rl.GetFrameTime()), 20, rl.Brown)
+		state.Text.DrawNextLine(fmt.Sprintf("Frame time: %.5f", rl.GetFrameTime()), 20, rl.Brown)
 		state.Text.DrawNextLine(fmt.Sprintf("FPS: %d", rl.GetFPS()), 20, rl.Brown)
-		state.Text.DrawNextLine(fmt.Sprintf("Memory: %s", humanize.Bytes(mem.Alloc)), 20, rl.Brown)
-
+		state.Text.DrawNextLine(fmt.Sprintf("Memory: %s (Frame GC Enabled: %v)", humanize.Bytes(mem.Alloc), state.FrameGC), 20, rl.Brown)
+		state.Text.DrawNextLine(fmt.Sprintf("Position (X, Y, Z): %f/%f/%f", state.Camera.Position.X, state.Camera.Position.Y, state.Camera.Position.Z), 20, rl.Brown)
 	}
 }

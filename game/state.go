@@ -8,6 +8,9 @@ type State struct {
 	IsShowingDebugInfo bool
 	Text               TextManager
 	Camera             rl.Camera3D
+	RanUntilNow        float32
+	Texture            rl.Texture2D
+	FrameGC            bool
 }
 
 func InitializeState() State {
@@ -18,5 +21,8 @@ func InitializeState() State {
 	camera.Fovy = 60.0
 	camera.Projection = rl.CameraPerspective
 
-	return State{Text: TextManager{}, Camera: camera}
+	img := rl.LoadImage("/tmp/img.png")
+	imgt := rl.LoadTextureFromImage(img)
+
+	return State{Text: TextManager{}, Camera: camera, Texture: imgt}
 }

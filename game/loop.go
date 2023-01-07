@@ -1,6 +1,8 @@
 package game
 
 import (
+	"runtime"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -11,6 +13,14 @@ func Setup(state *State) {
 func PreDraw(state *State) {
 	if rl.IsKeyPressed(rl.KeyF3) {
 		state.IsShowingDebugInfo = !state.IsShowingDebugInfo
+	}
+
+	if rl.IsKeyPressed(rl.KeyF10) {
+		state.FrameGC = !state.FrameGC
+	}
+
+	if state.FrameGC {
+		runtime.GC()
 	}
 
 	state.Text.Reset()
