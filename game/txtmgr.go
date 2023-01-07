@@ -12,14 +12,6 @@ type TextManager struct {
 }
 
 func (tm *TextManager) DrawNextLine(content string, size int32, color color.RGBA) {
-	size32 := int32(len(content))
-	meth := size32 * size / 2
-
-	if meth <= 100 {
-		meth += tm.padding
-	}
-
-	rl.DrawRectangle(tm.padding, tm.yPosition, meth, size, rl.Fade(rl.Gray, 0.3))
 	rl.DrawText(content, tm.padding, tm.yPosition, size, color)
 	tm.yPosition += size
 }

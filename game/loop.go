@@ -4,6 +4,10 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+func Setup(state *State) {
+	rl.SetCameraMode(state.Camera, rl.CameraFirstPerson)
+}
+
 func PreDraw(state *State) {
 	if rl.IsKeyPressed(rl.KeyF3) {
 		state.IsShowingDebugInfo = !state.IsShowingDebugInfo
@@ -13,10 +17,14 @@ func PreDraw(state *State) {
 }
 
 func Draw(state *State) {
-	rl.ClearBackground(rl.RayWhite)
-	maxX, maxY := rl.GetScreenHeight(), rl.GetScreenWidth()
+	rl.UpdateCamera(&state.Camera)
+	rl.ClearBackground(rl.Black)
 
-	rl.DrawCircle(int32(maxY/2), int32(maxX/2), 100, rl.Red)
+	rl.BeginMode3D(state.Camera)
+	Draw3D(state)
+	rl.EndMode3D()
+
+	rl.DrawCircle(int32(rl.GetScreenWidth())/2, int32(rl.GetScreenHeight())/2, 2, rl.RayWhite)
 
 	DrawDebugInfo(state)
 }

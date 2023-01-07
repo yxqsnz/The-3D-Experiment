@@ -8,7 +8,9 @@ import (
 func main() {
 	rl.InitWindow(800, 450, "The 3D Experiment")
 	rl.SetTargetFPS(60)
+
 	state := game.InitializeState()
+	game.Setup(&state)
 
 	for !rl.WindowShouldClose() {
 		game.PreDraw(&state)
